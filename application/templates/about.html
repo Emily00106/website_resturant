@@ -1,53 +1,41 @@
-{% extends "layout.html" %}
 
-{% block head %}
-    <!-- Inherit from 'layout.html' -->
-    {{ super() }}
-{% endblock %}
+{% extends "layout.html" %}
 
 {% block title %}
     About
 {% endblock %}
 
 {% block main %}
-    <!-- Background -->
+    <!-- 背景圖片 -->
     <img src="../static/images/trianglify_background.png" class="background position-fixed w-100 h-100 top-0 start-0" loading="lazy">
-    <!-- End of Background -->
-
-    <!-- Main Content -->
+    
+    <!-- 主要內容 -->
     <div class="container about mb-5 pb-5">
-        <!-- Title -->
+        <!-- 標題 -->
         <div class="row mb-3">
             <div class="col-md-12 text-center">
-                <h1 class="page-title" style="color: white;">想了解什麼食物?</h1>
+                <h1 class="page-title">想了解什麼食物？</h1>
             </div>
         </div>
-        <!-- End of Title -->
 
-        <!-- Recipe Search Form Section -->
+        <!-- 食譜查詢表單 -->
         <div class="row justify-content-center mt-5">
             <div class="col-md-8 col-lg-6">
-                <!-- Form Card -->
+                <!-- 表單卡片 -->
                 <div class="card shadow-lg">
-                    <div class="card-body" style="background-color: rgb(74, 64, 99);">
+                    <div class="card-body">
+                        <h2 class="card-title text-center mb-4">請輸入食譜查詢</h2>
 
-                        <!-- Recipe Query Form -->
+                        <!-- 食譜查詢表單 -->
                         <form action="/generate" method="post">
-                            <!-- Input Textarea for Recipe Prompt -->
                             <div class="mb-3">
-                                <label for="prompt" class="form-label" style="color: white;">查詢資訊：</label>
-                                <textarea 
-                                    name="prompt" 
-                                    id="prompt" 
-                                    class="form-control" 
-                                    rows="3" 
-                                    placeholder="輸入各種食物..."
-                                ></textarea>
+                                <label for="prompt" class="form-label">查詢食譜：</label>
+                                <textarea name="prompt" id="prompt" class="form-control" rows="3" placeholder="請輸入您想了解的食物..." required></textarea>
                             </div>
 
-                            <!-- Submit Button -->
+                            <!-- 提交按鈕 -->
                             <div class="d-grid">
-                                <button type="submit" class="btn btn-primary btn-lg shadow-sm" style="background-color: rgb(74, 64, 99); color: white;">
+                                <button type="submit" class="btn btn-primary btn-lg shadow-sm">
                                     確認餐點
                                 </button>
                             </div>
@@ -55,19 +43,16 @@
                     </div>
                 </div>
 
-                <!-- Display AI Response -->
+                <!-- 顯示 AI 回應 -->
                 {% if response %}
                 <div class="card shadow mt-4">
                     <div class="card-body">
-                        <h5 class="card-title">結果：</h5>
+                        <h5 class="card-title">做法：</h5>
                         <p class="card-text">{{ response }}</p>
                     </div>
                 </div>
                 {% endif %}
             </div>
         </div>
-        <!-- End of Recipe Search Form Section -->
-        
     </div>
-    <!-- End of Main Content -->
 {% endblock %}
