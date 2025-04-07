@@ -3,7 +3,7 @@
 /*********************/
 
 :root {
-    --main-color: rgb(74, 64, 99);
+    --main-color: rgb(255, 255, 204);
     --links-color: rgb(191, 172, 200);
     --links-hover-color: rgb(241, 217, 252);
     --highlights-color: rgb(67, 5, 126);
@@ -13,7 +13,7 @@
 }
 
 body {
-    background: rgb(255, 255, 204);
+    background: rgb(200, 198, 215);
     font-family: "Lora", serif;
 }
 
