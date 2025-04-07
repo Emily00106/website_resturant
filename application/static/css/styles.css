@@ -4,8 +4,8 @@
 
 :root {
     --main-color: rgb(205, 190, 166);
-    --links-color: rgb(191, 172, 200);
-    --links-hover-color: rgb(241, 217, 252);
+    --links-color: rgb(74, 39, 22);
+    --links-hover-color: rgb(180, 140, 100);
     --highlights-color: rgb(67, 5, 126);
     --highlights-v2-color: rgb(240, 160, 11);;
     --buttons-color: rgba(255, 178, 13, 0.7);
