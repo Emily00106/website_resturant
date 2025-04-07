@@ -39,11 +39,18 @@ def chat():
     
     return jsonify({"reply": reply})
 
-@app.route("/about")
+@app.route("/about", methods=["GET", "POST"])
 @cache.cached()
 def about():
-    """Renders the 'About Me' page of the website."""
+    """Renders the 'About' page with recipe search functionality."""
 
+    # 處理 POST 請求
+    if request.method == "POST":
+        prompt = request.form["prompt"]
+        response = generate_text(prompt)  # 呼叫生成文字的函數
+        return render_template("about.html", response=response)  # 將生成的回應顯示在頁面上
+
+    # 預設的 GET 請求，顯示普通的 about 頁面
     return render_template("about.html")
 
 
