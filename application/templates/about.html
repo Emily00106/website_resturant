@@ -19,7 +19,7 @@
         <!-- Title -->
         <div class="row mb-3">
             <div class="col-md-12 text-center">
-                <h1 class="page-title">ABOUT OUR RESTAURANT</h1>
+                <h1 class="page-title" style="color: white;">想了解什麼食物?</h1>
             </div>
         </div>
         <!-- End of Title -->
@@ -29,14 +29,13 @@
             <div class="col-md-8 col-lg-6">
                 <!-- Form Card -->
                 <div class="card shadow-lg">
-                    <div class="card-body">
-                        <h2 class="card-title text-center mb-4">今晚想做點什麼</h2>
+                    <div class="card-body" style="background-color: rgb(74, 64, 99);">
 
                         <!-- Recipe Query Form -->
                         <form action="/generate" method="post">
                             <!-- Input Textarea for Recipe Prompt -->
                             <div class="mb-3">
-                                <label for="prompt" class="form-label">查詢食譜：</label>
+                                <label for="prompt" class="form-label" style="color: white;">查詢資訊：</label>
                                 <textarea 
                                     name="prompt" 
                                     id="prompt" 
@@ -48,7 +47,7 @@
 
                             <!-- Submit Button -->
                             <div class="d-grid">
-                                <button type="submit" class="btn btn-primary btn-lg shadow-sm">
+                                <button type="submit" class="btn btn-primary btn-lg shadow-sm" style="background-color: rgb(74, 64, 99); color: white;">
                                     確認餐點
                                 </button>
                             </div>
@@ -60,7 +59,7 @@
                 {% if response %}
                 <div class="card shadow mt-4">
                     <div class="card-body">
-                        <h5 class="card-title">做法：</h5>
+                        <h5 class="card-title">結果：</h5>
                         <p class="card-text">{{ response }}</p>
                     </div>
                 </div>
