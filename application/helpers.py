@@ -1,20 +1,19 @@
 import json
 import os
 import openai
-from openai.types.chat import ChatCompletionMessageParam
 from config import TEXT_PATH
 
 def is_active(current_path: str, nav_path: str) -> str:
-    """Returns a string that shows which page is active in the navigation menu."""
+    """返回當前頁面是否為選中狀態，並將其標註為 'is-active'。"""
     return "is-active" if current_path == nav_path else ""
 
 def get_language_image(language: str) -> str:
-    """Returns the image of a programming language from 'skills.json'."""
+    """從 'skills.json' 文件中返回指定編程語言的圖片。"""
     try:
         with open(f"{TEXT_PATH}/skills.json") as file:
             data = json.load(file)
     except FileNotFoundError as error:
-        print(f"ERROR! {error}.")
+        print(f"錯誤！文件未找到：{error}.")
         return None
     else:
         for card in data.get("cards", []):
@@ -27,7 +26,7 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 def generate_text(prompt: str) -> str:
     try:
-        messages: list[ChatCompletionMessageParam] = [
+        messages = [
             {
                 "role": "system",
                 "content": (
@@ -41,15 +40,16 @@ def generate_text(prompt: str) -> str:
             }
         ]
 
-        # 使用 OpenAI API 生成回應
+        # 使用 OpenAI API 生成回應（使用 chat-completion API）
         response = openai.ChatCompletion.create(
-            model=os.getenv("OPENAI_MODEL", "gpt-3.5-turbo"),  # 確保這個是有效的模型名稱
+            model="gpt-3.5-turbo",  # 請根據需要選擇模型版本
             messages=messages,
             temperature=0.7,
         )
 
-        return response.choices[0].message["content"].strip()  # 訪問 content 的正確方式
+        # 返回生成的訊息內容
+        return response['choices'][0]['message']['content'].strip()
 
     except Exception as e:
-        print(f"OpenAI Error: {e}")
+        print(f"OpenAI 錯誤: {e}")
         return "系統錯誤，請稍後再試～"
