@@ -1,0 +1,32 @@
+/* 主容器樣式 */
+main {
+    min-height: calc(100vh - 10px); /* 確保主區域佔滿整個視窗高度減去10px（可調整以適應標頭或頁腳高度） */
+    display: flex; /* 啟用彈性盒布局 */
+    flex-direction: column; /* 將子元素排列為縱向 */
+}
+
+/* 自訂文章區域樣式 */
+.custom-article {
+    background-image: url("../images/BG.jpg"); /* 設定背景圖片 */
+    flex: 1; /* 允許此區域擴展以填滿可用空間 */
+    background-size: cover; /* 確保背景圖片覆蓋整個區域 */
+    background-position: center; /* 將背景圖片置中 */
+    position: relative; /* 設定位置以便子元素定位 */
+    display: flex; /* 啟用彈性盒布局 */
+    justify-content: center; /* 水平置中子元素 */
+    align-items: center; /* 垂直置中子元素 */
+    background-color: rgba(255, 255, 255, 0.5); /* 添加半透明的白色覆蓋層 */
+    background-blend-mode: overlay; /* 將背景圖片與覆蓋顏色混合 */
+}
+
+/* 自訂內容框樣式 */
+.custom-content {
+    width: 80%; /* 設定內容寬度為父容器的80% */
+    max-width: 800px; /* 限制最大寬度為800px */
+    padding: 20px; /* 在內容框內部添加20px的內邊距 */
+    background-color: rgba(255, 255, 255, 0.8); /* 設定半透明的白色背景 */
+    border-radius: 15px; /* 使內容框的邊角圓滑 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 添加細微的陰影以增加深度 */
+    text-align: center; /* 將內容框內的文字置中 */
+    font-family: 'Arial', sans-serif; /* 設定字體為Arial，若無則使用sans-serif */
+}

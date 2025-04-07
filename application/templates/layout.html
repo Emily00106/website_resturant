@@ -1,0 +1,120 @@
+<!-- Layout for all the pages -->
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        {% block head %}
+            <!-- Meta -->
+            <meta charset="utf-8">
+            <meta name="viewport" content="initial-scale=1, width=device-width">
+            <!-- Bootstrap -->
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+            <!-- Favicon -->
+            <link href="../static/images/favicon.ico" rel="icon">
+            <!-- Boxicons -->
+            <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+            <!-- Google Fonts -->
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
+            <!-- CSS Style -->
+            <link href="../static/css/styles.css" rel="stylesheet">
+            <link href="../static/css/chatbot.css" rel="stylesheet">
+            <link href="../static/css/home.css" rel="stylesheet">
+        {% endblock %}
+        <!-- Title -->
+        <title>{% block title %}{% endblock %}</title>
+    </head>
+
+    <body>
+        <!-- Header -->
+        <nav class="navbar navbar-expand-md fixed-top py-4">
+            <div class="container">
+                <!-- End of Title -->
+                <!-- Navigation Menu -->
+                <button class="navbar-toggler" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" data-bs-target="#navbar" data-bs-toggle="collapse" type="button">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbar">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link me-3 {{ request.path | is_active(url_for('home')) }}" href="{{ url_for('home') }}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link me-3 {{ request.path | is_active(url_for('about')) }}" href="{{ url_for('about') }}">About</a></li>
+                        <li class="nav-item"><a class="nav-link me-3 {{ request.path | is_active(url_for('contact')) }}" href="{{ url_for ('contact') }}">Contact</a></li>
+                    </ul>
+                </div>
+                <!-- End of Navigation Menu -->
+            </div>
+        </nav>
+        <!-- End of Header -->
+        <!-- Main Content -->
+        <main>
+            {% block main %}{% endblock %}
+        </main>
+        <!-- End of Main Content -->
+        <!-- Footer -->
+        <footer class="footer fixed-bottom py-3">
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div id="chatbot-toggle">💬</div>
+                            <div id="chatbot-window" style="display: none;">
+                            <div id="chatbot-header">點餐小幫手 🍜</div>
+                            <div id="chatbot-messages"></div>
+                            <input type="text" id="chatbot-input" placeholder="請輸入訊息..." />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        
+
+        <!-- End of Footer -->
+    </body>
+</html>
+
+<script>
+    const toggle = document.getElementById("chatbot-toggle");
+    const windowBox = document.getElementById("chatbot-window");
+    const input = document.getElementById("chatbot-input");
+    const messages = document.getElementById("chatbot-messages");
+
+    let chatbotInitialized = false;
+
+    toggle.onclick = () => {
+        const isVisible = windowBox.style.display === "block";
+        windowBox.style.display = isVisible ? "none" : "block";
+
+        // 如果是第一次開啟，加入歡迎訊息
+        if (!isVisible && !chatbotInitialized) {
+            appendMessage("bot", "歡迎光臨～我是這間餐廳的老闆，有任何點餐、推薦、或用餐相關問題都可以問我喔！"); // 歡迎訊息
+            chatbotInitialized = true;
+        }
+    };
+
+    input.addEventListener("keypress", async (e) => {
+        if (e.key === "Enter") {
+            const msg = input.value.trim();
+            if (!msg) return;
+            appendMessage("user", msg);
+            input.value = "";
+            const res = await fetch("/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: msg }),
+            });
+            const data = await res.json();
+            appendMessage("bot", data.reply);
+        }
+    });
+
+    function appendMessage(sender, text) {
+        const div = document.createElement("div");
+        div.className = sender === "user" ? "user-msg" : "bot-msg";
+        div.textContent = text;
+        messages.appendChild(div);
+        messages.scrollTop = messages.scrollHeight;
+    }
+</script>
+

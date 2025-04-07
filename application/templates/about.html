@@ -1,0 +1,47 @@
+<!-- The 'About' page -->
+
+{% extends "layout.html" %}
+
+{% block head %}
+    <!-- Inherit from 'layout.html' -->
+    {{ super() }}
+{% endblock %}
+
+{% block title %}
+    About
+{% endblock %}
+
+{% block main %}
+    <!-- Background -->
+    <img src="../static/images/trianglify_background.png" class="background position-fixed w-100 h-100 top-0 start-0" loading="lazy">
+    <!-- End of Background -->
+    <!-- Main Content -->
+    <div class="container about mb-5 pb-5">
+        <!-- Title -->
+        <div class="row mb-3">
+            <div class="col-md-12 text-center">
+                <h1 class="page-title">ABOUT OUR RESTAURANT</h1>
+            </div>
+        </div>
+        <!-- End of Title -->
+        <!-- Row -->
+        <div class="row flex-wrap align-content-center justify-content-center">
+            <div class="col-md-6 d-flex">
+                <div class="card description-card card-design">
+                    <div class="card-body">
+                        <div class="border-0 mb-3">
+                            <div class="card-body text-center">
+                                <p class="first-paragraph">
+                                    Welcome to our restaurant! We take pride in serving delicious, freshly prepared meals made from the finest ingredients. 
+                                    Our cozy atmosphere and friendly staff ensure a memorable dining experience for all our guests. Come and enjoy a taste of excellence with us!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End of Row -->
+    </div>
+    <!-- End of Main Content -->
+{% endblock %}

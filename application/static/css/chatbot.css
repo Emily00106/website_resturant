@@ -1,0 +1,97 @@
+/* 懸浮按鈕：點餐小幫手的啟動入口 */
+#chatbot-toggle {
+    position: fixed; /* 固定在畫面角落 */
+    bottom: 24px;
+    right: 24px;
+    background: #FF7043; /* 鮮橘色，更有食慾的顏色 */
+    color: white;
+    border-radius: 50%; /* 圓形按鈕 */
+    padding: 16px;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 999; /* 保證浮在最上層 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 聊天視窗本體 */
+#chatbot-window {
+    position: fixed;
+    bottom: 100px;
+    right: 24px;
+    width: 320px;
+    height: 440px;
+    background: #fff8f3; /* 淡橘米色背景，溫暖柔和 */
+    border: 2px solid #FF7043;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+    border-radius: 10px;
+    overflow: hidden; /* 避免內容溢出外框 */
+}
+
+/* 頂部標題列 */
+#chatbot-header {
+    background: #FF7043;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* 聊天訊息區 */
+#chatbot-messages {
+    flex: 1;
+    padding: 12px;
+    overflow-y: auto;
+    max-height: 300px;
+    overscroll-behavior: contain;
+    scrollbar-width: thin; /* Firefox 用 */
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+/* Chrome/Edge 滾動條設計 */
+#chatbot-messages::-webkit-scrollbar {
+    width: 6px;
+}
+#chatbot-messages::-webkit-scrollbar-thumb {
+    background: #FFAB91;
+    border-radius: 4px;
+}
+
+/* 輸入框樣式 */
+#chatbot-input {
+    border: none;
+    border-top: 1px solid #e0e0e0;
+    padding: 12px;
+    font-size: 15px;
+    width: 100%;
+    box-sizing: border-box;
+    background: #fff;
+}
+
+/* 使用者訊息泡泡 */
+.user-msg {
+    text-align: right;
+    color: #333;
+    margin: 6px 0;
+    background-color: #ffe0b2; /* 橘黃色系泡泡 */
+    padding: 8px 12px;
+    border-radius: 14px;
+    display: inline-block;
+    max-width: 80%;
+}
+
+/* GPT 回應泡泡 */
+.bot-msg {
+    text-align: left;
+    color: #4E342E;
+    background-color: #FFF3E0;
+    margin: 6px 0;
+    padding: 8px 12px;
+    border-radius: 14px;
+    display: inline-block;
+    max-width: 80%;
+}
