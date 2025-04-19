@@ -1,8 +1,6 @@
-# Sets up the routes for all the pages
-
-from flask import Flask, render_template, request, make_response, jsonify
+from flask import Flask, render_template, request, jsonify
 from flask_caching import Cache
-from config import TEMPLATES_PATH, TEXT_PATH
+from config import TEMPLATES_PATH
 from application.helpers import *
 
 
@@ -72,16 +70,8 @@ def generate():
     """生成食譜回應並顯示在 About 頁面"""
     prompt = request.form['prompt']  # 從表單獲取用戶的查詢
 
-    # 使用 OpenAI 生成回應
-    response = openai.ChatCompletion.create(
-        model="gpt-4",  # 使用 GPT-4 模型，可以根據需要更改為其他模型
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0.5,  # 控制生成文本的隨機性
-    )
-
-    # 提取生成的回應文本
-    generated_text = response['choices'][0]['message']['content'].strip()
+    response = generate_text(prompt)
 
     # 返回到 About 頁面並顯示生成的回應
-    return render_template('about.html', response=generated_text)
+    return render_template('about.html', response=response)
 
